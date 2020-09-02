@@ -13,3 +13,7 @@ export const increment = () => ({
 export const decrement = () => ({
         type: DECREMENT
 })
+
+
+//Actoinが発生したとき、
+//Actionのtypeに応じて状態をどう定義するかを決めるものが、Reducer
