@@ -1,13 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createStore } from 'redux';
+ // 作成したStoreを全コンポートネントに渡すための機能を持つのが、プロバイダー
+import {Provider} from 'react-redux';
 import './index.css';
-import App from './App';
+import reducer from './reducers/';
+// componentに関しても専用のディレクトリを作成しておくと、ソースの見通しが良くなる
+import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 
+const store = createStore(reducer);
+
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 
