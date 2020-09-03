@@ -3,4 +3,4 @@
 import { combineReducers } from 'redux'
 import count from './count' // カウントアプリの状態を管理するreducer
 
-export default combineReducers({count})
+export default combineReducers({count}) // がっちゃんこするreducerを全て記載

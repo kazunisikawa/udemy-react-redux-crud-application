@@ -1,31 +1,34 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 
-const App = () => (<Counter></Counter>)
+import { increment, decrement } from '../actions'
 
 class Counter extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { count: 0 }
-  }
 
-  handlePlusButton = () => {
-    this.setState({ count: this.state.count + 1})
-  }
-
-  hundleMinusButton = () => {
-    this.setState({ count: this.state.count - 1})
-  }
-
+  // constructorの働きは、reducerでやるので不要
+  // 処理はActionCreatorで処理の名称を確保して、そのActionCreatorでrecducer内で適切な処理
   render() {
-    console.log("render")
+    const props = this.props;
+
     return (
     <React.Fragment>
-      <div>count: {this.state.count}</div>
-      <button onClick={this.handlePlusButton}>+1</button>
-      <button onClick={this.hundleMinusButton}>-1</button>
+      <div>value: { props.value }</div>
+      <button onClick={props.increment}>+1</button>
+      <button onClick={props.decrement}>-1</button>
+      <div>value: { props.test }</div>
     </React.Fragment>
     )
   }
 }
 
-export default App;
+// 値をマッピング
+const mapStateToProps = (state) => ({ value: state.count.value, test: state.count.test })
+
+// ディスパッチ
+const mapDispatchToProps = dispatch => ({
+  increment: () => dispatch(increment()),
+  decrement: () => dispatch(decrement())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter)
+
